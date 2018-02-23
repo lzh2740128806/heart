@@ -51,7 +51,7 @@
 			//
 			if (navigator.getUserMedia) {
 
-			   navigator.getUserMedia({ video: true },
+			   navigator.getUserMedia({ video: { facingMode: { exact: "environment" } } },
 					function(stream) {
 						video.src = window.URL.createObjectURL(stream);
 						video.onloadedmetadata = function(e) {
@@ -92,11 +92,16 @@
 			}
 
 			var btn = document.querySelector('button');
+			var canclick = true;
 			$(btn).on('click', function () {
+			    if(!canclick){
+			        return;
+				}
+			    canclick = false;
                 timer = setInterval(setCanvas, 100);
                 setTimeout(function () {
                     clearInterval(timer);
-                    console.log(numArr);
+                    canclick = true;
                 }, 30000);
             });
 
