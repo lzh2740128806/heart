@@ -9,7 +9,7 @@
 			width: 100%;
 			height: 100%;
 			margin: 0;
-			background: #fff;
+			/*background: #fff;*/
 		}
 		video,.canvas{
 			position: fixed;
@@ -157,6 +157,8 @@
 			        return;
 				}
 			    canclick = false;
+			    xArr = [];
+			    yArr = [];
                 timer = setInterval(setCanvas, 100);
                 setTimeout(function () {
                     clearInterval(timer);
