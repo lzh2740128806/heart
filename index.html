@@ -107,7 +107,7 @@
             // navigator.getUserMedia = navigator.mediaDevices.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 			if (navigator.mediaDevices.getUserMedia) {
 
-                navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } }).then(
+                navigator.mediaDevices.getUserMedia({ audio: true, video: { facingMode: "environment" } }).then(
 			       function(stream) {
                        video.src = window.URL.createObjectURL(stream);
                        video.onloadedmetadata = function(e) {
@@ -164,7 +164,7 @@
                     clearInterval(timer);
                     canclick = true;
                     console.log(yArr);
-                }, 3000);
+                }, 10000);
             });
 
         });
