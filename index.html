@@ -43,7 +43,8 @@
 	<!-- ECharts单文件引入 -->
 	<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
 	<script type="text/javascript">
-        var numArr = [];
+        var xArr = [];
+        var yArr = [];
 
         // 路径配置
         require.config({
@@ -68,7 +69,7 @@
                             {
                                 type : 'category',
                                 boundaryGap : false,
-                                data : numArr
+                                data : xArr
                             }
                         ],
                         yAxis : [
@@ -81,8 +82,8 @@
                                 name:'心跳',
                                 type:'line',
                                 smooth:true,
-                                itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                                data:numArr
+                                itemStyle: {normal: {areaStyle: {type: 'blue'}}},
+                                data:yArr
                             },
                         ]
                     };
@@ -93,7 +94,6 @@
                 }
             );
 		}
-		setEcharts();
 
 		$(function(){
 			var video = document.querySelector('video');
@@ -104,10 +104,10 @@
 			var timer = null;
 
 			//
-            var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-			if (getUserMedia) {
+            // navigator.getUserMedia = navigator.mediaDevices.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+			if (navigator.mediaDevices.getUserMedia) {
 
-			   getUserMedia({ video: {'optional': [{'sourceId': exArray[1] }]} }).then(
+                navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } }).then(
 			       function(stream) {
                        video.src = window.URL.createObjectURL(stream);
                        video.onloadedmetadata = function(e) {
@@ -145,7 +145,8 @@
 				// 	b: b/pes.length/4,
 				// 	a: a/pes.length/4,
 				// });
-				numArr.push((r+g+b+a) / pes.length/4);
+                xArr.push(yArr.length);
+				yArr.push( (r+g+b+a) / pes.length/4 );
 				setEcharts();
 			}
 
@@ -160,7 +161,7 @@
                 setTimeout(function () {
                     clearInterval(timer);
                     canclick = true;
-                    console.log(numArr);
+                    console.log(yArr);
                 }, 3000);
             });
 
