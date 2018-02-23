@@ -107,7 +107,7 @@
             // navigator.getUserMedia = navigator.mediaDevices.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 			if (navigator.mediaDevices.getUserMedia) {
 
-                navigator.mediaDevices.getUserMedia({ audio: true, video: { facingMode: "environment" } }).then(
+                navigator.mediaDevices.getUserMedia({ audio: true, video: { facingMode: "environment", width: 800, height: 800 } }).then(
 			       function(stream) {
                        video.src = window.URL.createObjectURL(stream);
                        video.onloadedmetadata = function(e) {
