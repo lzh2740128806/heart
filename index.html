@@ -56,10 +56,11 @@
 						video.src = window.URL.createObjectURL(stream);
 						video.onloadedmetadata = function(e) {
 							video.play();
+							alert('播放了');
 						};
 					},
 					function(err) {
-						console.log("错误类型: " + err.name);
+						alert("错误类型: " + err.name);
 					}
 			   );
 
